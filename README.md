@@ -29,7 +29,8 @@ The prevention of wrong marking for words that are both tag and value does not w
 
 ## Release Notes
 
-### 1.0.0
+### 0.1.0
 
 Initial release
+First version for tags from vm-forum-velomobil-schnell.brf
 
