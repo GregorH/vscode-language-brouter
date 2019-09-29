@@ -2,6 +2,9 @@
 
 The extension BRouter is used for syntax highlighting of the profile files (*brf) of the Bike Routing Software.
 
+[BRouter](https://brouter.de/brouter/index.html)  
+[BRouter-Web](https://brouter.de/brouter-web/)
+
 ---
 
 ## Features
