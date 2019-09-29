@@ -3,6 +3,10 @@
     "displayName": "BRouter Syntax Highlighting",
     "description": "BRouter Bike Routing Software - Profile Syntax highlighting",
     "publisher": "GregorH",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/GregorH/vscode-language-brouter.git"
+	},
     "version": "0.1.0",
     "engines": {
         "vscode": "^1.38.0"
@@ -23,7 +27,7 @@
             "path": "./syntaxes/BRouter.tmLanguage.plist"
         }]
     },
-    "license": "MIT",
+    "license": "GPL-3.0",
     "__metadata": {
         "publisherDisplayName": "Gregor Heinrich"
     }
