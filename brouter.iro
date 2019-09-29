@@ -1,0 +1,266 @@
+#################################################################
+## Iro
+################################################################ 
+##
+## * Press Ctrl + '+'/'-' To Zoom in
+## * Press Ctrl + S to save and recalculate... 
+## * Documents are saved to web storage.
+## * Only one save slot supported.
+## * Matches cannot span lines.
+## * Unicode chars must be defined in \u0000 to \uffff format.
+## * All matches must be contained by a single group ( ... )
+## * Look behinds not permitted, (?<= or (?<!
+## * Look forwards are permitted (?= or (?!
+## * Constants are defined as __my_const = (......)
+## * The \= format allows unescaped regular expressions
+## * Constants referenced by match \= $${__my_const}
+## * Constants can reference other constants
+## * You are free to delete all the default scopes.
+## * Twitter : ainslec , Web: http://eeyo.io/iro
+##
+################################################################
+
+name                   = BRouter
+file_extensions []     = brf;
+
+################################################################
+## Constants
+################################################################
+
+__MY_CONSTANT \= (\b[a-z][a-z0-9]*)
+
+################################################################
+## Styles
+################################################################
+
+styles [] {
+
+.comment : style {
+   color                 = black
+   italic                = true
+   ace_scope             = comment
+   textmate_scope        = comment
+   pygments_scope        = Comment
+}
+
+.keyword : style {
+   color                 = light_blue
+   ace_scope             = keyword
+   textmate_scope        = keyword
+   pygments_scope        = Keyword
+}
+
+.numeric : style {
+   color                 = gold
+   ace_scope             = constant.numeric
+   textmate_scope        = constant.numeric
+   pygments_scope        = Number
+}
+
+.osm_key : style {
+   color                 = orange
+   bold                  = false
+   ace_scope             = keyword
+   textmate_scope        = keyword.other
+   pygments_scope        = Name
+}
+
+.osm_value : style {
+   color                 = violet
+   bold                  = false
+   ace_scope             = string
+   textmate_scope        = string
+   pygments_scope        = Name
+}
+
+.osm_attributes : style {
+   color                 = yellow
+   bold                  = false
+   ace_scope             = variable
+   textmate_scope        = constant.character
+   pygments_scope        = Name
+}
+
+.brouter_key : style {
+   color                 = grey
+   bold                  = false
+   ace_scope             = keyword
+   textmate_scope        = keyword.control
+   pygments_scope        = Name
+}
+
+.brouter_penalty : style {
+   color                 = grey
+   ace_scope             = variable
+   textmate_scope        = variable.parameter
+   pygments_scope        = Name
+}
+
+.constant : style {
+   color                 = green
+   ace_scope             = keyword
+   textmate_scope        = constant.language
+   pygments_scope        = Keyword
+}
+
+.section : style {
+   color                 = light_grey
+   ace_scope             = keyword
+   textmate_scope        = entity.name.section
+   pygments_scope        = Keyword
+}
+
+.operators : style {
+   color                 = brown
+   ace_scope             = keyword.operator
+   textmate_scope        = keyword.operator
+   pygments_scope        = Keyword.Type
+}
+
+.illegal : style {
+   color                 = white
+   background_color      = red
+   ace_scope             = invalid
+   textmate_scope        = invalid
+   pygments_scope        = Generic.Error
+}
+
+}
+
+#################################################
+## Parse contexts
+#################################################
+
+contexts [] {
+
+##############################################
+## Main Context - Entry point context
+##############################################
+
+main : context {
+
+   : pattern {
+      regex          \= \b(assign|if|then|else)\b
+      styles []       = .keyword;
+   }
+   
+   : pattern {
+      regex          \= \b(true|false|TRUE|FALSE|yes|no)\b
+      styles []       = .constant;
+   }
+   
+   : pattern {
+      regex          \= (---context:global|---context:way|---context:node)
+      styles []       = .section;
+   }
+   
+   : pattern {
+      regex          \= \b(downhillcost|downhillcutoff|uphillcost|uphillcutoff|elevationpenaltybuffer|elevationmaxbuffer|elevationbufferreduce)\b
+      styles []       = .brouter_key;
+   }
+   
+   : pattern {
+      regex          \= \b(validForBikes|validForFoot|validForCars)\b
+      styles []       = .brouter_key;
+   }
+   
+   : pattern {
+      regex          \= \b(pass1coefficient|pass2coefficient)\b
+      styles []       = .brouter_key;
+   }
+   
+   : pattern {
+      regex          \= \b(turncost|initialcost|costfactor|uphillcostfactor|downhillcostfactor|nodeaccessgranted|initialclassifier)\b
+      styles []       = .brouter_key;
+   }
+
+   : pattern {
+      regex          \= \b(ignore_cycleroutes|totalMass|maxSpeed|S_C_x|C_r|bikerPower|ignore_bicycle_no|consider_smoothness_tags|low_memory_cutoff|lmc|lcn|considerTurnRestrictions)\b
+      styles []       = .brouter_key;
+   }
+   
+   : pattern {
+      regex          \= \b(turnInstructionMode|turnInstructionCatchingRange|turnInstructionRoundabouts)\b
+      styles []       = .brouter_key;
+   }
+   
+   : pattern {
+      regex          \= \b(not|or|and|xor|multiply|add|sub|max|min|equal|greater|lesser|switch)\b
+      styles []       = .operators;
+   }
+   
+   : pattern {
+      regex          \= \b(maxspeed_forward|maxspeed_backward)\b
+      styles []       = .brouter_key;
+   }
+
+   : pattern {
+      regex          \= \b(maxspeed:forward|maxspeed:backward|maxspeed)\b
+      styles []       = .osm_key;
+   }
+
+   : pattern {
+      regex          \= \b(route|highway|railway|cycleway|footway|bicycle)\b
+      styles []       = .osm_key;
+   }
+
+   : pattern {
+      regex          \= \b(surface|smoothness|tracktype)\b
+      styles []       = .osm_key;
+   }
+
+   : pattern {
+      regex          \= \b(motorway|motorway_link|ferry|steps|trunk|trunk_link|primary|primary_link|secondary|secondary_link|tertiary|tertiary_link|unclassified|residential|service|track|grade1|grade2|grade3|grade4|grade5|living_street|designated|private|dismount|opposite|opposite_lane|opposite_track|urban|rural|path|road|pedestrian|bridleway|traffic_signals|crossing|level_crossing|stop|proposed|abandoned|tram|rail|asphalt|paved|plates|lanes|concrete|paving_stones|wood|metal|cobblestone|fine_gravel|compacted|sett|grass_paver|gravel|sand|pebblestone|ground|grass|unpaved|dirt|earth|mud|clay|excellent|good|very_good|intermediate|medium|rough|poor|robust_wheels|bad|high_clearance|off_road_wheels|very_bad|horrible|very_horrible|impassable|embedded_rails|concrete)\b
+      styles []       = .osm_value;
+   }
+   
+   : pattern {
+      regex          \= \b(isbadoneway|isgoodoneway|isroundabout|islinktype|isgoodforcars|priorityclassifier|classifiermask|concrete|tracktype|bicycle)\b
+      styles []       = .brouter_key;
+   }
+
+   : pattern {
+      regex          \= \b(oneway|defaultaccess|bikeaccess|any_cycleroute|route_bicycle_icn|route_bicycle_ncn|route_bicycle_rcn|route_bicycle_lcn|junction|roundabout|access|motorroad|footaccess|foot|vehicle|reversedirection)\b
+      styles []       = .brouter_key;
+   }
+
+   : pattern {
+      regex          \= \b(accesspenalty|onewaypenalty|downspeedpenalty|flatspeedpenalty|upspeedpenalty|surfacepenalty|smoothnesspenalty)\b
+      styles []       = .brouter_penalty;
+   }
+
+   : include "numeric" ;
+   
+   : pattern {
+      regex          \= (=|\||\(|\))
+      styles []       = .operators;
+   }
+   
+   : pattern {
+      regex          \= (#.*)
+      styles []       = .comment;
+   }
+   
+   : pattern {
+      regex          \= ([^\s])
+      styles []       = .illegal;
+   }
+   
+}
+
+#################################################
+## End of Contexts
+#################################################
+
+###########################################
+## Numeric Context
+###########################################
+
+numeric : context {
+   : pattern {
+      regex          \= ([+-]?([0-9]*[.])?[0-9]+)
+      styles []       = .numeric;
+   }
+}
+
+}
