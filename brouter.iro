@@ -1,9 +1,9 @@
 #################################################################
 ## Iro
-################################################################ 
+################################################################
 ##
 ## * Press Ctrl + '+'/'-' To Zoom in
-## * Press Ctrl + S to save and recalculate... 
+## * Press Ctrl + S to save and recalculate...
 ## * Documents are saved to web storage.
 ## * Only one save slot supported.
 ## * Matches cannot span lines.
@@ -143,32 +143,32 @@ main : context {
       regex          \= \b(assign|if|then|else)\b
       styles []       = .keyword;
    }
-   
+
    : pattern {
       regex          \= \b(true|false|TRUE|FALSE|yes|no)\b
       styles []       = .constant;
    }
-   
+
    : pattern {
       regex          \= (---context:global|---context:way|---context:node)
       styles []       = .section;
    }
-   
+
    : pattern {
       regex          \= \b(downhillcost|downhillcutoff|uphillcost|uphillcutoff|elevationpenaltybuffer|elevationmaxbuffer|elevationbufferreduce)\b
       styles []       = .brouter_key;
    }
-   
+
    : pattern {
       regex          \= \b(validForBikes|validForFoot|validForCars)\b
       styles []       = .brouter_key;
    }
-   
+
    : pattern {
       regex          \= \b(pass1coefficient|pass2coefficient)\b
       styles []       = .brouter_key;
    }
-   
+
    : pattern {
       regex          \= \b(turncost|initialcost|costfactor|uphillcostfactor|downhillcostfactor|nodeaccessgranted|initialclassifier)\b
       styles []       = .brouter_key;
@@ -178,17 +178,17 @@ main : context {
       regex          \= \b(ignore_cycleroutes|totalMass|maxSpeed|S_C_x|C_r|bikerPower|ignore_bicycle_no|consider_smoothness_tags|low_memory_cutoff|lmc|lcn|considerTurnRestrictions)\b
       styles []       = .brouter_key;
    }
-   
+
    : pattern {
       regex          \= \b(turnInstructionMode|turnInstructionCatchingRange|turnInstructionRoundabouts)\b
       styles []       = .brouter_key;
    }
-   
+
    : pattern {
       regex          \= \b(not|or|and|xor|multiply|add|sub|max|min|equal|greater|lesser|switch)\b
       styles []       = .operators;
    }
-   
+
    : pattern {
       regex          \= \b(maxspeed_forward|maxspeed_backward)\b
       styles []       = .brouter_key;
@@ -213,7 +213,7 @@ main : context {
       regex          \= \b(motorway|motorway_link|ferry|steps|trunk|trunk_link|primary|primary_link|secondary|secondary_link|tertiary|tertiary_link|unclassified|residential|service|track|grade1|grade2|grade3|grade4|grade5|living_street|designated|private|dismount|opposite|opposite_lane|opposite_track|urban|rural|path|road|pedestrian|bridleway|traffic_signals|crossing|level_crossing|stop|proposed|abandoned|tram|rail|asphalt|paved|plates|lanes|concrete|paving_stones|wood|metal|cobblestone|fine_gravel|compacted|sett|grass_paver|gravel|sand|pebblestone|ground|grass|unpaved|dirt|earth|mud|clay|excellent|good|very_good|intermediate|medium|rough|poor|robust_wheels|bad|high_clearance|off_road_wheels|very_bad|horrible|very_horrible|impassable|embedded_rails|concrete)\b
       styles []       = .osm_value;
    }
-   
+
    : pattern {
       regex          \= \b(isbadoneway|isgoodoneway|isroundabout|islinktype|isgoodforcars|priorityclassifier|classifiermask|concrete|tracktype|bicycle)\b
       styles []       = .brouter_key;
@@ -230,22 +230,22 @@ main : context {
    }
 
    : include "numeric" ;
-   
+
    : pattern {
       regex          \= (=|\||\(|\))
       styles []       = .operators;
    }
-   
+
    : pattern {
       regex          \= (#.*)
       styles []       = .comment;
    }
-   
+
    : pattern {
       regex          \= ([^\s])
       styles []       = .illegal;
    }
-   
+
 }
 
 #################################################
