@@ -4,13 +4,13 @@
 <!-- Generated via Iro -->
 <dict>
   <key>fileTypes</key>
-  <array> 
+  <array>
     <string>brf</string>
    </array>
   <key>name</key>
   <string>BRouter</string>
   <key>patterns</key>
-  <array> 
+  <array>
     <dict>
       <key>include</key>
       <string>#main</string>
@@ -25,7 +25,7 @@
     <key>main</key>
     <dict>
       <key>patterns</key>
-      <array> 
+      <array>
         <dict>
           <key>match</key>
           <string>\b(assign|if|then|else)\b</string>
@@ -161,7 +161,7 @@
     <key>numeric</key>
     <dict>
       <key>patterns</key>
-      <array> 
+      <array>
         <dict>
           <key>match</key>
           <string>([\x{002b}-]?([0-9]*[.])?[0-9]+)</string>
