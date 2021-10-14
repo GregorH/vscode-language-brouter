@@ -73,13 +73,14 @@ styles [] {
    pygments_scope        = Name
 }
 
-.osm_attributes : style {
-   color                 = yellow
-   bold                  = false
-   ace_scope             = variable
-   textmate_scope        = constant.character
-   pygments_scope        = Name
-}
+## unused
+# .osm_attributes : style {
+#    color                 = yellow
+#    bold                  = false
+#    ace_scope             = variable
+#    textmate_scope        = constant.character
+#    pygments_scope        = Name
+# }
 
 .brouter_key : style {
    color                 = grey
@@ -117,13 +118,21 @@ styles [] {
    pygments_scope        = Keyword.Type
 }
 
-.illegal : style {
-   color                 = white
-   background_color      = red
-   ace_scope             = invalid
-   textmate_scope        = invalid
-   pygments_scope        = Generic.Error
+.variable : style {
+   color                 = black
+   ace_scope             = variable
+   textmate_scope        = variable.other
+   pygments_scope        = Name
 }
+
+## unused
+# .illegal : style {
+#    color                 = white
+#    background_color      = red
+#    ace_scope             = invalid
+#    textmate_scope        = invalid
+#    pygments_scope        = Generic.Error
+# }
 
 }
 
@@ -243,7 +252,7 @@ main : context {
    
    : pattern {
       regex          \= ([^\s])
-      styles []       = .illegal;
+      styles []       = .variable;
    }
    
 }

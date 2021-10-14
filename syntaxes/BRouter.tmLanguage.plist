@@ -154,7 +154,7 @@
           <key>match</key>
           <string>([^\s])</string>
           <key>name</key>
-          <string>invalid.BRouter</string>
+          <string>variable.other.BRouter</string>
         </dict>
        </array>
     </dict>
