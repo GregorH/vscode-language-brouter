@@ -258,7 +258,7 @@ main : context {
 
 numeric : context {
    : pattern {
-      regex          \= ([+-]?([0-9]*[.])?[0-9]+)
+      regex          \= ((?:[+-]|\b)([0-9]*[.])?[0-9]+)\b
       styles []       = .numeric;
    }
 }

@@ -164,7 +164,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>([\x{002b}-]?([0-9]*[.])?[0-9]+)</string>
+          <string>((?:[\x{002b}-]|\b)([0-9]*[.])?[0-9]+)\b</string>
           <key>name</key>
           <string>constant.numeric.BRouter</string>
         </dict>
